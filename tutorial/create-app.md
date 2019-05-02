@@ -18,7 +18,7 @@ Rails crea un nuevo directorio denominado `graph-tutorial` y scaffolding una apl
 rails server
 ```
 
-Abra el explorador y vaya a `http://localhost:3000`. Si todo funciona, verá un error "Yay! ¡ Estás en raíles! " mensaje. Si no ve ese mensaje, consulte la [Guía de introducción](http://guides.rubyonrails.org/)a los rieles.
+Abra el explorador y vaya a `http://localhost:3000`. Si todo funciona, verá un error "Yay! ¡ Estás en raíles! " Mensaje. Si no ve ese mensaje, consulte la [Guía de introducción](http://guides.rubyonrails.org/)a los rieles.
 
 Antes de continuar, instale algunas gemas adicionales que usará más adelante:
 

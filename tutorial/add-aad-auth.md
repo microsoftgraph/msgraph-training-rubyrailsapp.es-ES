@@ -286,7 +286,7 @@ Ahora, actualice la vista para usar `signout` la acción. Abierto `./app/views/l
 <%= link_to "Sign Out", {:controller => :auth, :action => :signout}, :class => "dropdown-item" %>
 ```
 
-ReInicie el servidor y pase por el proceso de inicio de sesión. Deberás volver a la Página principal, pero la interfaz de usuario debe cambiar para indicar que has iniciado sesión.
+Reinicie el servidor y pase por el proceso de inicio de sesión. Deberás volver a la Página principal, pero la interfaz de usuario debe cambiar para indicar que has iniciado sesión.
 
 ![Una captura de pantalla de la Página principal después de iniciar sesión](./images/add-aad-auth-01.png)
 
