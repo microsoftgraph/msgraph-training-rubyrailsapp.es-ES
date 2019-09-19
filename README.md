@@ -4,13 +4,13 @@ Este módulo le presentará cómo trabajar con Microsoft Graph para obtener acce
 
 ## <a name="lab---build-ruby-on-rails-apps-with-microsoft-graph"></a>Laboratorio: creación de aplicaciones de Ruby on Rails con Microsoft Graph
 
-En este laboratorio, creará una aplicación Web de Ruby on Rails mediante el punto de conexión de autenticación de Azure AD v2 para obtener acceso a los datos de Office 365 con Microsoft Graph.
+En este laboratorio, creará una aplicación Web de Ruby on Rails mediante el punto de conexión de autenticación de la plataforma de identidad de Microsoft para obtener acceso a los datos de Office 365 con Microsoft Graph.
 
 - [Tutorial de Microsoft Graph Ruby](https://docs.microsoft.com/graph/training/ruby-tutorial)
 
 ## <a name="demos"></a>Demostraciones
 
-El [](./Demos) directorio demos de este repositorio contiene copias del proyecto que corresponden a la realización de secciones individuales del tutorial. Si solo quiere demostrar una sección concreta del tutorial, puede comenzar con la versión de la sección anterior.
+El directorio [demos](./Demos) de este repositorio contiene copias del proyecto que corresponden a la realización de secciones individuales del tutorial. Si solo quiere demostrar una sección concreta del tutorial, puede comenzar con la versión de la sección anterior.
 
 - [01-Create-App](Demos/01-create-app): se completó [la creación de una aplicación Web de Ruby on Rails](https://docs.microsoft.com/graph/training/ruby-tutorial?tutorial-step=1)
 - [02-Add-AAD-auth](Demos/02-add-aad-auth): [adición de autenticación de Azure ad](https://docs.microsoft.com/graph/training/ruby-tutorial?tutorial-step=3) completada
