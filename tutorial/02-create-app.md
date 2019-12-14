@@ -18,11 +18,12 @@ Rails crea un nuevo directorio denominado `graph-tutorial` y scaffolding una apl
 rails server
 ```
 
-Abra el explorador y vaya a `http://localhost:3000`. Si todo funciona, verá un error "Yay! ¡ Estás en raíles! " Mensaje. Si no ve ese mensaje, consulte la [Guía de introducción](http://guides.rubyonrails.org/)a los rieles.
+Abra el explorador y vaya a `http://localhost:3000`. Si todo funciona, verá un error "Yay! ¡ Estás en raíles! " Mensaje. Si no ve ese mensaje, consulte la guía de introducción a los [rieles](http://guides.rubyonrails.org/).
 
 Antes de continuar, instale algunas gemas adicionales que usará más adelante:
 
 - [omniauth-OAuth2](https://github.com/omniauth/omniauth-oauth2) para controlar los flujos de tokens de OAuth y inicio de sesión.
+- [omniauth-rails_csrf_protection](https://github.com/cookpad/omniauth-rails_csrf_protection) para agregar la protección CSRF a omniauth.
 - [httparty](https://github.com/jnunemaker/httparty) para realizar llamadas a Microsoft Graph.
 - [Nokogiri](https://github.com/sparklemotion/nokogiri) para procesar cuerpos HTML de correo electrónico.
 - [ActiveRecord-session_store](https://github.com/rails/activerecord-session_store) para almacenar sesiones en la base de datos.
@@ -31,6 +32,7 @@ Ejecute los siguientes comandos en su CLI.
 
 ```Shell
 bundle add omniauth-oauth2
+bundle add omniauth-rails_csrf_protection
 bundle add httparty
 bundle add nokogiri
 bundle add activerecord-session_store
