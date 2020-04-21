@@ -1,218 +1,93 @@
 <!-- markdownlint-disable MD002 MD041 -->
 
-<span data-ttu-id="6773e-101">En este ejercicio usará [Ruby on Rails](https://rubyonrails.org/) para crear una aplicación Web.</span><span class="sxs-lookup"><span data-stu-id="6773e-101">In this exercise you will use [Ruby on Rails](https://rubyonrails.org/) to build a web app.</span></span> <span data-ttu-id="6773e-102">Si aún no tiene guías instaladas, puede instalarla desde la interfaz de línea de comandos (CLI) con el siguiente comando.</span><span class="sxs-lookup"><span data-stu-id="6773e-102">If you don't already have Rails installed, you can install it from your command-line interface (CLI) with the following command.</span></span>
+<span data-ttu-id="bed56-101">En este ejercicio usará [Ruby on Rails](https://rubyonrails.org/) para crear una aplicación Web.</span><span class="sxs-lookup"><span data-stu-id="bed56-101">In this exercise you will use [Ruby on Rails](https://rubyonrails.org/) to build a web app.</span></span>
 
-```Shell
-gem install rails
-```
+1. <span data-ttu-id="bed56-102">Si aún no tiene guías instaladas, puede instalarla desde la interfaz de línea de comandos (CLI) con el siguiente comando.</span><span class="sxs-lookup"><span data-stu-id="bed56-102">If you don't already have Rails installed, you can install it from your command-line interface (CLI) with the following command.</span></span>
 
-<span data-ttu-id="6773e-103">Abra la CLI, navegue hasta un directorio donde tenga derechos para crear archivos y ejecute el siguiente comando para crear una nueva aplicación de guías.</span><span class="sxs-lookup"><span data-stu-id="6773e-103">Open your CLI, navigate to a directory where you have rights to create files, and run the following command to create a new Rails app.</span></span>
+    ```Shell
+    gem install rails -v 6.0.2.2
+    ```
 
-```Shell
-rails new graph-tutorial
-```
+1. <span data-ttu-id="bed56-103">Abra la CLI, navegue hasta un directorio donde tenga derechos para crear archivos y ejecute el siguiente comando para crear una nueva aplicación de guías.</span><span class="sxs-lookup"><span data-stu-id="bed56-103">Open your CLI, navigate to a directory where you have rights to create files, and run the following command to create a new Rails app.</span></span>
 
-<span data-ttu-id="6773e-104">Rails crea un nuevo directorio denominado `graph-tutorial` y scaffolding una aplicación guías.</span><span class="sxs-lookup"><span data-stu-id="6773e-104">Rails creates a new directory called `graph-tutorial` and scaffolds a Rails app.</span></span> <span data-ttu-id="6773e-105">Navegue a este nuevo directorio y escriba el siguiente comando para iniciar un servidor Web local.</span><span class="sxs-lookup"><span data-stu-id="6773e-105">Navigate to this new directory and enter the following command to start a local web server.</span></span>
+    ```Shell
+    rails new graph-tutorial
+    ```
 
-```Shell
-rails server
-```
+1. <span data-ttu-id="bed56-104">Navegue a este nuevo directorio y escriba el siguiente comando para iniciar un servidor Web local.</span><span class="sxs-lookup"><span data-stu-id="bed56-104">Navigate to this new directory and enter the following command to start a local web server.</span></span>
 
-<span data-ttu-id="6773e-106">Abra el explorador y vaya a `http://localhost:3000`.</span><span class="sxs-lookup"><span data-stu-id="6773e-106">Open your browser and navigate to `http://localhost:3000`.</span></span> <span data-ttu-id="6773e-107">Si todo funciona, verá un error "Yay!</span><span class="sxs-lookup"><span data-stu-id="6773e-107">If everything is working, you will see a "Yay!</span></span> <span data-ttu-id="6773e-108">¡ Estás en raíles! "</span><span class="sxs-lookup"><span data-stu-id="6773e-108">You're on Rails!"</span></span> <span data-ttu-id="6773e-109">Mensaje.</span><span class="sxs-lookup"><span data-stu-id="6773e-109">message.</span></span> <span data-ttu-id="6773e-110">Si no ve ese mensaje, consulte la guía de introducción a los [rieles](http://guides.rubyonrails.org/).</span><span class="sxs-lookup"><span data-stu-id="6773e-110">If you don't see that message, check the [Rails getting started guide](http://guides.rubyonrails.org/).</span></span>
+    ```Shell
+    rails server
+    ```
 
-<span data-ttu-id="6773e-111">Antes de continuar, instale algunas gemas adicionales que usará más adelante:</span><span class="sxs-lookup"><span data-stu-id="6773e-111">Before moving on, install some additional gems that you will use later:</span></span>
+1. <span data-ttu-id="bed56-105">Abra el explorador y vaya a `http://localhost:3000`.</span><span class="sxs-lookup"><span data-stu-id="bed56-105">Open your browser and navigate to `http://localhost:3000`.</span></span> <span data-ttu-id="bed56-106">Si todo funciona, verá un error "Yay!</span><span class="sxs-lookup"><span data-stu-id="bed56-106">If everything is working, you will see a "Yay!</span></span> <span data-ttu-id="bed56-107">¡ Estás en raíles! "</span><span class="sxs-lookup"><span data-stu-id="bed56-107">You're on Rails!"</span></span> <span data-ttu-id="bed56-108">Mensaje.</span><span class="sxs-lookup"><span data-stu-id="bed56-108">message.</span></span> <span data-ttu-id="bed56-109">Si no ve ese mensaje, consulte la guía de introducción a los [rieles](http://guides.rubyonrails.org/).</span><span class="sxs-lookup"><span data-stu-id="bed56-109">If you don't see that message, check the [Rails getting started guide](http://guides.rubyonrails.org/).</span></span>
 
-- <span data-ttu-id="6773e-112">[omniauth-OAuth2](https://github.com/omniauth/omniauth-oauth2) para controlar los flujos de tokens de OAuth y inicio de sesión.</span><span class="sxs-lookup"><span data-stu-id="6773e-112">[omniauth-oauth2](https://github.com/omniauth/omniauth-oauth2) for handling sign-in and OAuth token flows.</span></span>
-- <span data-ttu-id="6773e-113">[omniauth-rails_csrf_protection](https://github.com/cookpad/omniauth-rails_csrf_protection) para agregar la protección CSRF a omniauth.</span><span class="sxs-lookup"><span data-stu-id="6773e-113">[omniauth-rails_csrf_protection](https://github.com/cookpad/omniauth-rails_csrf_protection) for adding CSRF protection to OmniAuth.</span></span>
-- <span data-ttu-id="6773e-114">[httparty](https://github.com/jnunemaker/httparty) para realizar llamadas a Microsoft Graph.</span><span class="sxs-lookup"><span data-stu-id="6773e-114">[httparty](https://github.com/jnunemaker/httparty) for making calls to Microsoft Graph.</span></span>
-- <span data-ttu-id="6773e-115">[Nokogiri](https://github.com/sparklemotion/nokogiri) para procesar cuerpos HTML de correo electrónico.</span><span class="sxs-lookup"><span data-stu-id="6773e-115">[nokogiri](https://github.com/sparklemotion/nokogiri) to process HTML bodies of email.</span></span>
-- <span data-ttu-id="6773e-116">[ActiveRecord-session_store](https://github.com/rails/activerecord-session_store) para almacenar sesiones en la base de datos.</span><span class="sxs-lookup"><span data-stu-id="6773e-116">[activerecord-session_store](https://github.com/rails/activerecord-session_store) for storing sessions in the database.</span></span>
+## <a name="install-gems"></a><span data-ttu-id="bed56-110">Instalar gemas</span><span class="sxs-lookup"><span data-stu-id="bed56-110">Install gems</span></span>
 
-<span data-ttu-id="6773e-117">Ejecute los siguientes comandos en su CLI.</span><span class="sxs-lookup"><span data-stu-id="6773e-117">Run the following commands in your CLI.</span></span>
+<span data-ttu-id="bed56-111">Antes de continuar, instale algunas gemas adicionales que usará más adelante:</span><span class="sxs-lookup"><span data-stu-id="bed56-111">Before moving on, install some additional gems that you will use later:</span></span>
 
-```Shell
-bundle add omniauth-oauth2
-bundle add omniauth-rails_csrf_protection
-bundle add httparty
-bundle add nokogiri
-bundle add activerecord-session_store
-rails generate active_record:session_migration
-```
+- <span data-ttu-id="bed56-112">[omniauth-OAuth2](https://github.com/omniauth/omniauth-oauth2) para controlar los flujos de tokens de OAuth y inicio de sesión.</span><span class="sxs-lookup"><span data-stu-id="bed56-112">[omniauth-oauth2](https://github.com/omniauth/omniauth-oauth2) for handling sign-in and OAuth token flows.</span></span>
+- <span data-ttu-id="bed56-113">[omniauth-rails_csrf_protection](https://github.com/cookpad/omniauth-rails_csrf_protection) para agregar la protección CSRF a omniauth.</span><span class="sxs-lookup"><span data-stu-id="bed56-113">[omniauth-rails_csrf_protection](https://github.com/cookpad/omniauth-rails_csrf_protection) for adding CSRF protection to OmniAuth.</span></span>
+- <span data-ttu-id="bed56-114">[httparty](https://github.com/jnunemaker/httparty) para realizar llamadas a Microsoft Graph.</span><span class="sxs-lookup"><span data-stu-id="bed56-114">[httparty](https://github.com/jnunemaker/httparty) for making calls to Microsoft Graph.</span></span>
+- <span data-ttu-id="bed56-115">[ActiveRecord-session_store](https://github.com/rails/activerecord-session_store) para almacenar sesiones en la base de datos.</span><span class="sxs-lookup"><span data-stu-id="bed56-115">[activerecord-session_store](https://github.com/rails/activerecord-session_store) for storing sessions in the database.</span></span>
 
-<span data-ttu-id="6773e-118">El último comando genera un resultado similar al siguiente:</span><span class="sxs-lookup"><span data-stu-id="6773e-118">The last command generates output like the following:</span></span>
+1. <span data-ttu-id="bed56-116">Abra **./Gemfile** y agregue las siguientes líneas.</span><span class="sxs-lookup"><span data-stu-id="bed56-116">Open **./Gemfile** and add the following lines.</span></span>
 
-```Shell
-create  db/migrate/20180618172216_add_sessions_table.rb
-```
+    :::code language="ruby" source="../demo/graph-tutorial/Gemfile" id="GemFileSnippet":::
 
-<span data-ttu-id="6773e-119">Abra el archivo que se ha creado y busque la siguiente línea.</span><span class="sxs-lookup"><span data-stu-id="6773e-119">Open the file that was created and locate the following line.</span></span>
+1. <span data-ttu-id="bed56-117">En la CLI, ejecute el siguiente comando.</span><span class="sxs-lookup"><span data-stu-id="bed56-117">In your CLI, run the following command.</span></span>
 
-```ruby
-class AddSessionsTable < ActiveRecord::Migration
-```
+    ```Shell
+    bundle install
+    ```
 
-<span data-ttu-id="6773e-120">Cambie esa línea a la siguiente.</span><span class="sxs-lookup"><span data-stu-id="6773e-120">Change that line to the following.</span></span>
+1. <span data-ttu-id="bed56-118">En la CLI, ejecute los siguientes comandos para configurar la base de datos para almacenar las sesiones.</span><span class="sxs-lookup"><span data-stu-id="bed56-118">In your CLI, run the following commands to configure the database for storing sessions.</span></span>
 
-```ruby
-class AddSessionsTable < ActiveRecord::Migration[5.2]
-```
+    ```Shell
+    rails generate active_record:session_migration
+    rake db:migrate
+    ```
 
-> [!NOTE]
-> <span data-ttu-id="6773e-121">Se supone que se usan los carriles 5.2. x.</span><span class="sxs-lookup"><span data-stu-id="6773e-121">This assumes that you are using Rails 5.2.x.</span></span> <span data-ttu-id="6773e-122">Si usa una versión diferente, reemplace `5.2` por su versión.</span><span class="sxs-lookup"><span data-stu-id="6773e-122">If you are using a different version, replace `5.2` with your version.</span></span>
+1. <span data-ttu-id="bed56-119">Cree un nuevo archivo llamado `session_store.rb` en el directorio **./config/Initializers** y agregue el siguiente código.</span><span class="sxs-lookup"><span data-stu-id="bed56-119">Create a new file called `session_store.rb` in the **./config/initializers** directory, and add the following code.</span></span>
 
-<span data-ttu-id="6773e-123">Guarde el archivo y ejecute el siguiente comando.</span><span class="sxs-lookup"><span data-stu-id="6773e-123">Save the file and run the following command.</span></span>
+    :::code language="ruby" source="../demo/graph-tutorial/config/initializers/session_store.rb" id="SessionStoreSnippet":::
 
-```Shell
-rake db:migrate
-```
+## <a name="design-the-app"></a><span data-ttu-id="bed56-120">Diseñar la aplicación</span><span class="sxs-lookup"><span data-stu-id="bed56-120">Design the app</span></span>
 
-<span data-ttu-id="6773e-124">Por último, configure raíles para usar el nuevo almacén de sesión.</span><span class="sxs-lookup"><span data-stu-id="6773e-124">Finally, configure Rails to use the new session store.</span></span> <span data-ttu-id="6773e-125">Cree un nuevo archivo llamado `session_store.rb` en el `./config/initializers` directorio y agregue el siguiente código.</span><span class="sxs-lookup"><span data-stu-id="6773e-125">Create a new file called `session_store.rb` in the `./config/initializers` directory, and add the following code.</span></span>
+<span data-ttu-id="bed56-121">En esta sección, creará la interfaz de usuario básica para la aplicación.</span><span class="sxs-lookup"><span data-stu-id="bed56-121">In this section you'll create the basic UI for the app.</span></span>
 
-```ruby
-Rails.application.config.session_store :active_record_store, key: '_graph_app_session'
-```
+1. <span data-ttu-id="bed56-122">Abra **./app/views/layouts/Application.html.Erb** y reemplace su contenido por lo siguiente.</span><span class="sxs-lookup"><span data-stu-id="bed56-122">Open **./app/views/layouts/application.html.erb** and replace its contents with the following.</span></span>
 
-## <a name="design-the-app"></a><span data-ttu-id="6773e-126">Diseñar la aplicación</span><span class="sxs-lookup"><span data-stu-id="6773e-126">Design the app</span></span>
+    :::code language="html" source="../demo/graph-tutorial/app/views/layouts/application.html.erb" id="LayoutSnippet":::
 
-<span data-ttu-id="6773e-127">Para empezar, actualice el diseño global de la aplicación.</span><span class="sxs-lookup"><span data-stu-id="6773e-127">Start by updating the global layout for the app.</span></span> <span data-ttu-id="6773e-128">Abra `./app/views/layouts/application.html.erb` y reemplace su contenido por lo siguiente.</span><span class="sxs-lookup"><span data-stu-id="6773e-128">Open `./app/views/layouts/application.html.erb` and replace its contents with the following.</span></span>
+    <span data-ttu-id="bed56-123">Este código agrega un [bootstrap](http://getbootstrap.com/) para los estilos sencillos y la [fuente maravilla](https://fontawesome.com/) para algunos iconos simples.</span><span class="sxs-lookup"><span data-stu-id="bed56-123">This code adds [Bootstrap](http://getbootstrap.com/) for simple styling, and [Font Awesome](https://fontawesome.com/) for some simple icons.</span></span> <span data-ttu-id="bed56-124">También define un diseño global con una barra de navegación.</span><span class="sxs-lookup"><span data-stu-id="bed56-124">It also defines a global layout with a nav bar.</span></span>
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Ruby Graph Tutorial</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+1. <span data-ttu-id="bed56-125">Abra **./app/assets/Stylesheets/Application.CSS** y agregue lo siguiente al final del archivo.</span><span class="sxs-lookup"><span data-stu-id="bed56-125">Open **./app/assets/stylesheets/application.css** and add the following to the end of the file.</span></span>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    :::code language="css" source="../demo/graph-tutorial/app/assets/stylesheets/application.css" id="CssSnippet":::
 
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container">
-        <%= link_to "Ruby Graph Tutorial", root_path, class: "navbar-brand" %>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: "nav-link#{' active' if controller.controller_name == 'home'}" %>
-            </li>
-            <% if @user_name %>
-              <li class="nav-item" data-turbolinks="false">
-                <a class="nav-link" href="#">Calendar</a>
-              </li>
-            <% end %>
-          </ul>
-          <ul class="navbar-nav justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
-                <i class="fas fa-external-link-alt mr-1"></i>Docs
-              </a>
-            </li>
-            <% if @user_name %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                  <% if @user_avatar %>
-                    <img src=<%= @user_avatar %> class="rounded-circle align-self-center mr-2" style="width: 32px;">
-                  <% else %>
-                    <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style="width: 32px;"></i>
-                  <% end %>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <h5 class="dropdown-item-text mb-0"><%= @user_name %></h5>
-                  <p class="dropdown-item-text text-muted mb-0"><%= @user_email %></p>
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">Sign Out</a>
-                </div>
-              </li>
-            <% else %>
-              <li class="nav-item">
-                <a href="#" class="nav-link">Sign In</a>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main role="main" class="container">
-      <% if @errors %>
-        <% @errors.each do |error| %>
-          <div class="alert alert-danger" role="alert">
-            <p class="mb-3"><%= error[:message] %></p>
-            <%if error[:debug] %>
-              <pre class="alert-pre border bg-light p-2"><code><%= error[:debug] %></code></pre>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-      <%= yield %>
-    </main>
-  </body>
-</html>
-```
+1. <span data-ttu-id="bed56-126">Genere un controlador de páginas principales con el siguiente comando.</span><span class="sxs-lookup"><span data-stu-id="bed56-126">Generate a home page controller with the following command.</span></span>
 
-<span data-ttu-id="6773e-129">Este código agrega un [bootstrap](http://getbootstrap.com/) para los estilos sencillos y la [fuente maravilla](https://fontawesome.com/) para algunos iconos simples.</span><span class="sxs-lookup"><span data-stu-id="6773e-129">This code adds [Bootstrap](http://getbootstrap.com/) for simple styling, and [Font Awesome](https://fontawesome.com/) for some simple icons.</span></span> <span data-ttu-id="6773e-130">También define un diseño global con una barra de navegación.</span><span class="sxs-lookup"><span data-stu-id="6773e-130">It also defines a global layout with a nav bar.</span></span>
+    ```Shell
+    rails generate controller Home index
+    ```
 
-<span data-ttu-id="6773e-131">Ahora, `./app/assets/stylesheets/application.css` abra y agregue lo siguiente al final del archivo.</span><span class="sxs-lookup"><span data-stu-id="6773e-131">Now open `./app/assets/stylesheets/application.css` and add the following to the end of the file.</span></span>
+1. <span data-ttu-id="bed56-127">Configure `index` la acción en `Home` el controlador como la página predeterminada para la aplicación.</span><span class="sxs-lookup"><span data-stu-id="bed56-127">Configure the `index` action on the `Home` controller as the default page for the app.</span></span> <span data-ttu-id="bed56-128">Abra **./config/Routes.RB** y reemplace su contenido por lo siguiente:</span><span class="sxs-lookup"><span data-stu-id="bed56-128">Open **./config/routes.rb** and replace its contents with the following</span></span>
 
-```css
-body {
-  padding-top: 4.5rem;
-}
+    ```ruby
+    Rails.application.routes.draw do
+      get 'home/index'
+      root 'home#index'
 
-.alert-pre {
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: pre-wrap;
-}
-```
+      # Add future routes here
 
-<span data-ttu-id="6773e-132">Ahora, reemplace la página predeterminada por otra nueva.</span><span class="sxs-lookup"><span data-stu-id="6773e-132">Now replace the default page with a new one.</span></span> <span data-ttu-id="6773e-133">Genere un controlador de páginas principales con el siguiente comando.</span><span class="sxs-lookup"><span data-stu-id="6773e-133">Generate a home page controller with the following command.</span></span>
+    end
+    ```
 
-```Shell
-rails generate controller Home index
-```
+1. <span data-ttu-id="bed56-129">Abra **./app/View/home/index.html.Erb** y reemplace su contenido por lo siguiente.</span><span class="sxs-lookup"><span data-stu-id="bed56-129">Open **./app/view/home/index.html.erb** and replace its contents with the following.</span></span>
 
-<span data-ttu-id="6773e-134">A continuación, `index` configure la `Home` acción en el controlador como la página predeterminada para la aplicación.</span><span class="sxs-lookup"><span data-stu-id="6773e-134">Then configure the `index` action on the `Home` controller as the default page for the app.</span></span> <span data-ttu-id="6773e-135">Abra `./config/routes.rb` y reemplace el contenido por el siguiente</span><span class="sxs-lookup"><span data-stu-id="6773e-135">Open `./config/routes.rb` and replace the contents with the following</span></span>
+    :::code language="html" source="../demo/graph-tutorial/app/views/home/index.html.erb" id="HomeSnippet":::
 
-```ruby
-Rails.application.routes.draw do
-  get 'home/index'
-  root 'home#index'
+1. <span data-ttu-id="bed56-130">Guarde todos los cambios y reinicie el servidor.</span><span class="sxs-lookup"><span data-stu-id="bed56-130">Save all of your changes and restart the server.</span></span> <span data-ttu-id="bed56-131">Ahora, la aplicación debe tener un aspecto muy diferente.</span><span class="sxs-lookup"><span data-stu-id="bed56-131">Now, the app should look very different.</span></span>
 
-  # Add future routes here
-
-end
-```
-
-<span data-ttu-id="6773e-136">Ahora, Abra `./app/view/home/index.html.erb` el archivo y reemplace el contenido por lo siguiente.</span><span class="sxs-lookup"><span data-stu-id="6773e-136">Now open the `./app/view/home/index.html.erb` file and replace its contents with the following.</span></span>
-
-```html
-<div class="jumbotron">
-  <h1>Ruby Graph Tutorial</h1>
-  <p class="lead">This sample app shows how to use the Microsoft Graph API to access Outlook and OneDrive data from Ruby</p>
-  <% if @user_name %>
-    <h4>Welcome <%= @user_name %>!</h4>
-    <p>Use the navigation bar at the top of the page to get started.</p>
-  <% else %>
-    <a href="#" class="btn btn-primary btn-large">Click here to sign in</a>
-  <% end %>
-</div>
-```
-
-<span data-ttu-id="6773e-137">Guarde todos los cambios y reinicie el servidor.</span><span class="sxs-lookup"><span data-stu-id="6773e-137">Save all of your changes and restart the server.</span></span> <span data-ttu-id="6773e-138">Ahora, la aplicación debe tener un aspecto muy diferente.</span><span class="sxs-lookup"><span data-stu-id="6773e-138">Now, the app should look very different.</span></span>
-
-![Una captura de pantalla de la Página principal rediseñada](./images/create-app-01.png)
+    ![Una captura de pantalla de la Página principal rediseñada](./images/create-app-01.png)
