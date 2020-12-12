@@ -10,7 +10,12 @@ Este tutorial le enseña a crear una aplicación Web de Ruby on Rails que use la
 
 ## <a name="prerequisites"></a>Requisitos previos
 
-Antes de iniciar este tutorial, debe tener [Ruby](https://www.ruby-lang.org/en/downloads/) instalado en el equipo de desarrollo. Si no tiene Ruby, visite el vínculo anterior para las opciones de descarga.
+Antes de iniciar este tutorial, debe tener las siguientes herramientas instaladas en el equipo de desarrollo.
+
+- [Ruby](https://www.ruby-lang.org/en/downloads/)
+- [SQLite3](https://sqlite.org/index.html)
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/)
 
 También debe tener una cuenta de Microsoft personal con un buzón de correo en Outlook.com o una cuenta profesional o educativa de Microsoft. Si no tiene una cuenta de Microsoft, hay un par de opciones para obtener una cuenta gratuita:
 
@@ -18,7 +23,12 @@ También debe tener una cuenta de Microsoft personal con un buzón de correo en 
 - Puede [registrarse para el programa de desarrolladores de office 365](https://developer.microsoft.com/office/dev-program) para obtener una suscripción gratuita a Office 365.
 
 > [!NOTE]
-> Este tutorial se ha escrito con la versión 2.6.5 de Ruby. Los pasos de esta guía pueden funcionar con otras versiones, pero no se han probado.
+> Este tutorial se ha redactado con las siguientes versiones de las herramientas necesarias. Los pasos de esta guía pueden funcionar con otras versiones, pero no se han probado.
+>
+> - Versión 2.6.6 de Ruby.
+> - SQLite3 versión 3.31.1
+> - Node.js versión 14.15.0
+> - 1.22.0 de la versión de hilado
 
 ## <a name="feedback"></a>Comentarios
 

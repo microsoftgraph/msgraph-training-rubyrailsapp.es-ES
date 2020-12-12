@@ -6,12 +6,12 @@ En este ejercicio, ampliará la aplicación del ejercicio anterior para admitir 
 
     :::code language="ruby" source="../demo/graph-tutorial/config/oauth_environment_variables.rb.example":::
 
-1. Reemplace `YOUR_APP_ID_HERE` por el identificador de la aplicación del portal de registro de la `YOUR_APP_SECRET_HERE` aplicación y reemplace por la contraseña que ha generado.
+1. Reemplace `YOUR_APP_ID_HERE` por el identificador de la aplicación del portal de registro de la aplicación y reemplace `YOUR_APP_SECRET_HERE` por la contraseña que ha generado.
 
     > [!IMPORTANT]
     > Si usa un control de código fuente como GIT, ahora sería un buen momento para excluir el `oauth_environment_variables.rb` archivo del control de código fuente para evitar la pérdida inadvertida del identificador de la aplicación y la contraseña.
 
-1. Abra el **./config/Environment.RB** y agregue el siguiente código antes `Rails.application.initialize!` de la línea.
+1. Abra el **./config/Environment.RB** y agregue el siguiente código antes de la `Rails.application.initialize!` línea.
 
     :::code language="ruby" source="../demo/graph-tutorial/config/environment.rb" id="LoadOAuthSettingsSnippet" highlight="4-6":::
 
@@ -28,7 +28,7 @@ Ya ha instalado la `omniauth-oauth2` gema, pero para que funcione con los puntos
     - Establece el `client_options` para especificar los puntos de conexión de la plataforma de identidad de Microsoft.
     - Especifica que el `scope` parámetro debe enviarse durante la fase de autorización.
     - Asigna la `id` propiedad del usuario como identificador único del usuario.
-    - Usa el token de acceso para recuperar el perfil del usuario de Microsoft Graph para rellenar `raw_info` el hash.
+    - Usa el token de acceso para recuperar el perfil del usuario de Microsoft Graph para rellenar el `raw_info` hash.
     - Invalida la dirección URL de devolución de llamada para asegurarse de que coincide con la devolución de llamada registrada en el portal de registro de la aplicación.
 
 1. Cree un nuevo archivo llamado `omniauth_graph.rb` en la carpeta **./config/Initializers** y agregue el siguiente código.
@@ -47,7 +47,7 @@ Ahora que el middleware de OmniAuth está configurado, puede pasar a agregar el 
     rails generate controller Auth
     ```
 
-1. Abra **./app/controllers/auth_controller. RB**. Agregue un método de devolución de `AuthController` llamada a la clase. Este método será llamado por el middleware OmniAuth una vez que se haya completado el flujo de OAuth.
+1. Abra **./app/controllers/auth_controller. RB**. Agregue un método de devolución de llamada a la `AuthController` clase. Este método será llamado por el middleware OmniAuth una vez que se haya completado el flujo de OAuth.
 
     ```ruby
     def callback
@@ -65,10 +65,10 @@ Ahora que el middleware de OmniAuth está configurado, puede pasar a agregar el 
 
     ```ruby
     # Add route for OmniAuth callback
-    match '/auth/:provider/callback', to: 'auth#callback', via: [:get, :post]
+    match '/auth/:provider/callback', :to => 'auth#callback', :via => [:get, :post]
     ```
 
-1. Inicie el servidor y vaya a `https://localhost:3000`. Haga clic en el botón de inicio de sesión y se le `https://login.microsoftonline.com`redirigirá a. Inicie sesión con su cuenta de Microsoft y dé su consentimiento a los permisos solicitados. El explorador redirige a la aplicación, que muestra el hash generado por OmniAuth.
+1. Inicie el servidor y vaya a `https://localhost:3000` . Haga clic en el botón de inicio de sesión y se le redirigirá a `https://login.microsoftonline.com` . Inicie sesión con su cuenta de Microsoft y dé su consentimiento a los permisos solicitados. El explorador redirige a la aplicación, que muestra el hash generado por OmniAuth.
 
     ```json
     {
@@ -85,20 +85,50 @@ Ahora que el middleware de OmniAuth está configurado, puede pasar a agregar el 
       },
       "extra": {
         "raw_info": {
-          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
-          "id": "eb52b3b2-c4ac-4b4f-bacd-d5f7ece55df0",
-          "businessPhones": [
-            "+1 425 555 0109"
-          ],
-          "displayName": "Adele Vance",
-          "givenName": "Adele",
-          "jobTitle": "Retail Manager",
-          "mail": "AdeleV@contoso.onmicrosoft.com",
-          "mobilePhone": null,
-          "officeLocation": "18/2111",
-          "preferredLanguage": "en-US",
-          "surname": "Vance",
-          "userPrincipalName": "AdeleV@contoso.onmicrosoft.com"
+          "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(displayName,mail,mailboxSettings,userPrincipalName)/$entity",
+          "displayName": "Lynne Robbins",
+          "mail": "LynneR@contoso.OnMicrosoft.com",
+          "userPrincipalName": "LynneR@contoso.OnMicrosoft.com",
+          "id": "d294e784-840e-4f9f-bb1e-95c0a75f2f18@2d18179c-4386-4cbd-8891-7fd867c4f62e",
+          "mailboxSettings": {
+            "archiveFolder": "AAMkAGI2...",
+            "timeZone": "Pacific Standard Time",
+            "delegateMeetingMessageDeliveryOptions": "sendToDelegateOnly",
+            "dateFormat": "M/d/yyyy",
+            "timeFormat": "h:mm tt",
+            "automaticRepliesSetting": {
+              "status": "disabled",
+              "externalAudience": "all",
+              "internalReplyMessage": "",
+              "externalReplyMessage": "",
+              "scheduledStartDateTime": {
+                "dateTime": "2020-12-09T17:00:00.0000000",
+                "timeZone": "UTC"
+              },
+              "scheduledEndDateTime": {
+                "dateTime": "2020-12-10T17:00:00.0000000",
+                "timeZone": "UTC"
+              }
+            },
+            "language": {
+              "locale": "en-US",
+              "displayName": "English (United States)"
+            },
+            "workingHours": {
+              "daysOfWeek": [
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday"
+              ],
+              "startTime": "08:00:00.0000000",
+              "endTime": "17:00:00.0000000",
+              "timeZone": {
+                "name": "Pacific Standard Time"
+              }
+            }
+          }
         }
       }
     }
@@ -125,6 +155,10 @@ Ahora que puede obtener tokens, es el momento de implementar una forma de almace
       session[:user_email]
     end
 
+    def user_timezone
+      session[:user_timezone]
+    end
+
     def access_token
       session[:graph_token_hash][:token]
     end
@@ -134,7 +168,7 @@ Ahora que puede obtener tokens, es el momento de implementar una forma de almace
 
     :::code language="ruby" source="../demo/graph-tutorial/app/controllers/application_controller.rb" id="BeforeActionSnippet":::
 
-    Este método establece las variables que el diseño (en **Application. html. Erb**) utiliza para mostrar la información del usuario en la barra de navegación. Si lo agrega aquí, no tendrá que agregar este código en todas las acciones de controlador. Sin embargo, también se ejecutará para las acciones `AuthController`del, lo que no es óptimo.
+    Este método establece las variables que el diseño (en **application.html. Erb**) utiliza para mostrar la información del usuario en la barra de navegación. Si lo agrega aquí, no tendrá que agregar este código en todas las acciones de controlador. Sin embargo, también se ejecutará para las acciones del `AuthController` , lo que no es óptimo.
 
 1. Agregue el siguiente código a la `AuthController` clase en **./app/Controllers/auth_controller. RB** para omitir la acción anterior.
 
@@ -170,7 +204,7 @@ Antes de probar esta nueva característica, agregue una forma de cerrar sesión.
 
 ## <a name="refreshing-tokens"></a>Actualizar tokens
 
-Si observa atentamente el hash generado por OmniAuth, verá que hay dos tokens en el hash: `token` y. `refresh_token` El valor en `token` es el token de acceso, que se envía en `Authorization` el encabezado de las llamadas a la API. Este es el token que permite que la aplicación tenga acceso a Microsoft Graph en nombre del usuario.
+Si observa atentamente el hash generado por OmniAuth, verá que hay dos tokens en el hash: `token` y `refresh_token` . El valor en `token` es el token de acceso, que se envía en el `Authorization` encabezado de las llamadas a la API. Este es el token que permite que la aplicación tenga acceso a Microsoft Graph en nombre del usuario.
 
 Sin embargo, este token es de corta duración. El token expira una hora después de su emisión. Aquí es donde el `refresh_token` valor se vuelve útil. El token de actualización permite que la aplicación solicite un nuevo token de acceso sin que el usuario tenga que iniciar sesión de nuevo. Actualice el código de administración de tokens para implementar la actualización de tokens.
 
@@ -185,9 +219,9 @@ Sin embargo, este token es de corta duración. El token expira una hora después
 
     :::code language="ruby" source="../demo/graph-tutorial/app/controllers/application_controller.rb" id="RefreshTokensSnippet":::
 
-    Este método usa la gema de [OAuth2](https://github.com/oauth-xx/oauth2) (una dependencia de `omniauth-oauth2` la gema) para actualizar los tokens y actualiza la sesión.
+    Este método usa la gema de [OAuth2](https://github.com/oauth-xx/oauth2) (una dependencia de la `omniauth-oauth2` gema) para actualizar los tokens y actualiza la sesión.
 
-1. Reemplace el método `access_token` actual por lo siguiente.
+1. Reemplace el `access_token` método actual por lo siguiente.
 
     :::code language="ruby" source="../demo/graph-tutorial/app/controllers/application_controller.rb" id="AccessTokenSnippet":::
 

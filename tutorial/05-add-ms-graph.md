@@ -19,26 +19,37 @@ En este ejercicio, incorporará Microsoft Graph a la aplicación. Para esta apli
     module GraphHelper
       GRAPH_HOST = 'https://graph.microsoft.com'.freeze
 
-      def make_api_call(endpoint, token, params = nil)
-        headers = {
-          Authorization: "Bearer #{token}"
-        }
+      def make_api_call(method, endpoint, token, headers = nil, params = nil, payload = nil)
+        headers ||= {}
+        headers[:Authorization] = "Bearer #{token}"
+        headers[:Accept] = 'application/json'
 
-        query = params || {}
+        params ||= {}
 
-        HTTParty.get "#{GRAPH_HOST}#{endpoint}",
-                     headers: headers,
-                     query: query
+        case method.upcase
+        when 'GET'
+          HTTParty.get "#{GRAPH_HOST}#{endpoint}",
+                       :headers => headers,
+                       :query => params
+        when 'POST'
+          headers['Content-Type'] = 'application/json'
+          HTTParty.post "#{GRAPH_HOST}#{endpoint}",
+                        :headers => headers,
+                        :query => params,
+                        :body => payload ? payload.to_json : nil
+        else
+          raise "HTTP method #{method.upcase} not implemented"
+        end
       end
     end
     ```
 
-Tómese un momento para revisar lo que hace el código. Realiza una sencilla solicitud GET a través del `httparty` GEM al punto de conexión solicitado. Envía el token de acceso en el `Authorization` encabezado e incluye los parámetros de consulta que se pasan.
+Tómese un momento para revisar lo que hace el código. Realiza una solicitud GET o POST sencilla a través de la `httparty` GEM para el punto de conexión solicitado. Envía el token de acceso en el `Authorization` encabezado e incluye los parámetros de consulta que se pasan.
 
-Por ejemplo, para usar el `make_api_call` método para realizar una llamada a `https://graph.microsoft.com/v1.0/me?$select=displayName`get, puede llamarlo de esta manera:
+Por ejemplo, para usar el `make_api_call` método para realizar una llamada a get `https://graph.microsoft.com/v1.0/me?$select=displayName` , puede llamarlo de esta manera:
 
 ```ruby
-make_api_call `/v1.0/me`, access_token, { '$select': 'displayName' }
+make_api_call 'GET', '/v1.0/me', access_token, { '$select': 'displayName' }
 ```
 
 A partir de entonces, podrá crear más adelante a medida que implementa más características de Microsoft Graph en la aplicación.
@@ -48,25 +59,32 @@ A partir de entonces, podrá crear más adelante a medida que implementa más ca
 1. En la CLI, ejecute el siguiente comando para agregar un nuevo controlador.
 
     ```Shell
-    rails generate controller Calendar index
+    rails generate controller Calendar index new
     ```
 
 1. Agregue la nueva ruta a **./config/Routes.RB**.
 
     ```ruby
-    get 'calendar', to: 'calendar#index'
+    get 'calendar', :to => 'calendar#index'
     ```
 
-1. Agregue un nuevo método a la aplicación auxiliar de Graph para [Mostrar los eventos del usuario](/graph/api/user-list-events?view=graph-rest-1.0). Abra **./app/helpers/graph_helper. RB** y agregue el siguiente método al `GraphHelper` módulo.
+1. Agregue un nuevo método a la aplicación auxiliar de Graph para [obtener una vista de calendario](https://docs.microsoft.com/graph/api/calendar-list-calendarview?view=graph-rest-1.0). Abra **./app/helpers/graph_helper. RB** y agregue el siguiente método al `GraphHelper` módulo.
 
     :::code language="ruby" source="../demo/graph-tutorial/app/helpers/graph_helper.rb" id="GetCalendarSnippet":::
 
     Tenga en cuenta lo que está haciendo este código.
 
-    - La dirección URL a la que se `/v1.0/me/events`llamará es.
-    - El `$select` parámetro limita los campos devueltos para cada evento a solo aquellos que la vista usará realmente.
-    - El `$orderby` parámetro ordena los resultados por la fecha y hora en que se crearon, con el elemento más reciente en primer lugar.
+    - La dirección URL a la que se llamará es `/v1.0/me/calendarview` .
+        - El `Prefer: outlook.timezone` encabezado hace que las horas de inicio y finalización de los resultados se ajusten a la zona horaria del usuario.
+        - Los `startDateTime` `endDateTime` parámetros y establecen el inicio y el final de la vista.
+        - El `$select` parámetro limita los campos devueltos para cada evento a solo aquellos que la vista usará realmente.
+        - El `$orderby` parámetro ordena los resultados por hora de inicio.
+        - El `$top` parámetro limita los resultados a 50 eventos.
     - Para una respuesta correcta, devuelve la matriz de elementos contenidos en la `value` clave.
+
+1. Agregue un nuevo método a la aplicación auxiliar de Graph para buscar un [identificador de zona horaria de IANA](https://www.iana.org/time-zones) basado en un nombre de zona horaria de Windows. Esto es necesario porque Microsoft Graph puede devolver zonas horarias como nombres de zona horaria de Windows y la clase **DateTime** Ruby requiere identificadores de zona horaria de IANA.
+
+    :::code language="ruby" source="../demo/graph-tutorial/app/helpers/graph_helper.rb" id="ZoneMappingSnippet":::
 
 1. Abra **./app/controllers/calendar_controller. RB** y reemplace todo el contenido por lo siguiente.
 
@@ -76,13 +94,20 @@ A partir de entonces, podrá crear más adelante a medida que implementa más ca
       include GraphHelper
 
       def index
-        @events = get_calendar_events access_token || []
+        # Get the IANA identifier of the user's time zone
+        time_zone = get_iana_from_windows(user_timezone)
+
+        # Calculate the start and end of week in the user's time zone
+        start_datetime = Date.today.beginning_of_week(:sunday).in_time_zone(time_zone).to_time
+        end_datetime = start_datetime.advance(:days => 7)
+
+        @events = get_calendar_view access_token, start_datetime, end_datetime, user_timezone || []
         render json: @events
       rescue RuntimeError => e
         @errors = [
           {
-            message: 'Microsoft Graph returned an error getting events.',
-            debug: e
+            :message => 'Microsoft Graph returned an error getting events.',
+            :debug => e
           }
         ]
       end
@@ -95,7 +120,7 @@ A partir de entonces, podrá crear más adelante a medida que implementa más ca
 
 Ahora puede Agregar HTML para mostrar los resultados de forma más fácil de uso.
 
-1. Abra **./app/views/Calendar/index.html.Erb** y reemplace su contenido por lo siguiente.
+1. Abra **./app/views/calendar/index.html. Erb** y reemplace su contenido por lo siguiente.
 
     :::code language="html" source="../demo/graph-tutorial/app/views/calendar/index.html.erb" id="CalendarSnippet":::
 

@@ -16,7 +16,7 @@ Si no tiene una cuenta de Microsoft, hay un par de opciones para obtener una cue
 
 1. Abra un explorador y vaya al [centro de administración de Azure Active Directory](https://aad.portal.azure.com). Inicie sesión con una **cuenta personal** (también conocida como: cuenta Microsoft) o una **cuenta profesional o educativa**.
 
-1. Seleccione **Azure Active Directory** en el panel de navegación de la izquierda y, después, seleccione **registros de aplicaciones** en **administrar**.
+1. Seleccione **Azure Active Directory** en el panel de navegación izquierdo y, a continuación, seleccione **Registros de aplicaciones** en **Administrar**.
 
     ![Una captura de pantalla de los registros de la aplicación ](/tutorial/images/aad-portal-app-registrations.png)
 
@@ -45,14 +45,20 @@ Si no tiene una cuenta de Microsoft, hay un par de opciones para obtener una cue
 
 ## <a name="configure-the-sample"></a>Configuración del ejemplo
 
-1. Cambie el nombre `./config/oauth_environment_variables.rb.example` del archivo `oauth_environment_variables.rb`a.
-1. Edite `oauth_environment_variables.rb` el archivo y realice los cambios siguientes.
+1. Cambie el nombre del `./config/oauth_environment_variables.rb.example` archivo a `oauth_environment_variables.rb` .
+1. Edite el `oauth_environment_variables.rb` archivo y realice los cambios siguientes.
     1. Reemplace `YOUR_APP_ID_HERE` por el **identificador de aplicación** que obtuvo desde el portal de registro de aplicaciones.
     1. Reemplace `YOUR APP PASSWORD HERE` por la contraseña que obtuvo en el portal de registro de aplicaciones.
 1. En la interfaz de línea de comandos (CLI), navegue a este directorio y ejecute el siguiente comando para instalar los requisitos.
 
     ```Shell
     bundle install
+    ```
+
+1. En la CLI, ejecute el siguiente comando para instalar los paquetes de hilados.
+
+    ```Shell
+    yarn install
     ```
 
 1. En la CLI, ejecute el siguiente comando para inicializar la base de datos de la aplicación.

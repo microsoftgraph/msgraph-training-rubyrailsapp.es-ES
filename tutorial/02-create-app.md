@@ -5,7 +5,7 @@ En este ejercicio usará [Ruby on Rails](https://rubyonrails.org/) para crear un
 1. Si aún no tiene guías instaladas, puede instalarla desde la interfaz de línea de comandos (CLI) con el siguiente comando.
 
     ```Shell
-    gem install rails -v 6.0.2.2
+    gem install rails -v 6.0.3.4
     ```
 
 1. Abra la CLI, navegue hasta un directorio donde tenga derechos para crear archivos y ejecute el siguiente comando para crear una nueva aplicación de guías.
@@ -56,11 +56,11 @@ Antes de continuar, instale algunas gemas adicionales que usará más adelante:
 
 En esta sección, creará la interfaz de usuario básica para la aplicación.
 
-1. Abra **./app/views/layouts/Application.html.Erb** y reemplace su contenido por lo siguiente.
+1. Abra **./app/views/layouts/application.html. Erb** y reemplace su contenido por lo siguiente.
 
     :::code language="html" source="../demo/graph-tutorial/app/views/layouts/application.html.erb" id="LayoutSnippet":::
 
-    Este código agrega un [bootstrap](http://getbootstrap.com/) para los estilos sencillos y la [fuente maravilla](https://fontawesome.com/) para algunos iconos simples. También define un diseño global con una barra de navegación.
+    Este código agrega [bootstrap](http://getbootstrap.com/) para los estilos sencillos y [fabric Core](https://developer.microsoft.com/fluentui#/get-started#fabric-core) para algunos iconos sencillos. También define un diseño global con una barra de navegación.
 
 1. Abra **./app/assets/Stylesheets/Application.CSS** y agregue lo siguiente al final del archivo.
 
@@ -72,7 +72,7 @@ En esta sección, creará la interfaz de usuario básica para la aplicación.
     rails generate controller Home index
     ```
 
-1. Configure `index` la acción en `Home` el controlador como la página predeterminada para la aplicación. Abra **./config/Routes.RB** y reemplace su contenido por lo siguiente:
+1. Configure la `index` acción en el `Home` controlador como la página predeterminada para la aplicación. Abra **./config/Routes.RB** y reemplace su contenido por lo siguiente:
 
     ```ruby
     Rails.application.routes.draw do
@@ -84,9 +84,11 @@ En esta sección, creará la interfaz de usuario básica para la aplicación.
     end
     ```
 
-1. Abra **./app/View/home/index.html.Erb** y reemplace su contenido por lo siguiente.
+1. Abra **./app/view/home/index.html. Erb** y reemplace su contenido por lo siguiente.
 
     :::code language="html" source="../demo/graph-tutorial/app/views/home/index.html.erb" id="HomeSnippet":::
+
+1. Agregue un archivo PNG denominado **no-profile-photo.png** en el directorio **./app/assets/images** .
 
 1. Guarde todos los cambios y reinicie el servidor. Ahora, la aplicación debe tener un aspecto muy diferente.
 
